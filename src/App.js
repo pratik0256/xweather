@@ -6,17 +6,17 @@ const WeatherApp = () => {
   const [weatherInfo, setWeatherInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const apiKey = "425c820e21b841008f473201241107";
+  const API_KEY = "425c820e21b841008f473201241107"; 
 
   const getWeatherData = async () => {
     if (!cityName) return;
 
-    setIsLoading(true);
+    setIsLoading(true); // 
     setWeatherInfo(null);
 
     try {
       const response = await fetch(
-        `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${cityName}`
+        `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${cityName}`
       );
       const weatherResponse = await response.json();
 
@@ -43,15 +43,22 @@ const WeatherApp = () => {
       />
       <button onClick={getWeatherData}>Search</button>
 
-      {isLoading && <p>Loading data…</p>}
+      {}
+      {isLoading && <p className="loading-text">Loading data...</p>}
 
       {weatherInfo && (
         <div className="weather-cards">
+          {}
           <div className="weather-card">
-            <h3>{weatherInfo.location.name}</h3>
             <p>Temperature: {weatherInfo.current.temp_c}°C</p>
+          </div>
+          <div className="weather-card">
             <p>Humidity: {weatherInfo.current.humidity}%</p>
+          </div>
+          <div className="weather-card">
             <p>Condition: {weatherInfo.current.condition.text}</p>
+          </div>
+          <div className="weather-card">
             <p>Wind Speed: {weatherInfo.current.wind_kph} km/h</p>
           </div>
         </div>
